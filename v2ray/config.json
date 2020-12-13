@@ -1,0 +1,33 @@
+{
+    "inbounds": [{
+        "port": 4000,
+        "listen": "127.0.0.1",
+        "protocol": "vmess",
+        "settings": {
+            "clients": [{
+                "id": "YOURUUID",
+                "alterId": 64
+            }]
+        },
+        "streamSettings": {
+            "network": "ws",
+            "wsSettings": {
+                "path": "/path"
+            },
+            "tlsSettings": {
+                "allowInsecure": false
+            }
+        }
+    }],
+    "outbounds": [{
+        "protocol": "freedom",
+        "settings": {
+
+        }
+    }],
+    "transport": {
+        "sockopt": {
+            "tcpFastOpen": true
+        }
+    }
+}
