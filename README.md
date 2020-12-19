@@ -2,7 +2,7 @@
 
 ## 安装（系统为 Centos7，其余还未测试）
 
-```
+```bash
 yum install python3 # 安装python3
 
 pip3 install pyyaml
@@ -13,9 +13,9 @@ git clone https://github.com/YHPeter/Multi-VPSs-Users-Management-Script-for-Troj
 目录结构：
 
 ```
-├─yaml+trojan+v2ray用户管理脚本.py
+├─clash+trojan+v2ray用户管理脚本.py
 ├─demo.yaml
-├─accounts.txt
+├─config.yaml
 ├─trojan
 │  └─config.json
 └─v2ray
@@ -24,20 +24,7 @@ git clone https://github.com/YHPeter/Multi-VPSs-Users-Management-Script-for-Troj
 ## 使用脚本
 进入脚本所在目录：
 
-```python3 yaml+trojan+v2ray用户管理脚本.py ```
-
-Output:
-```
-是否更改yaml文件夹路径[yes/no]
-是否更改trojan文件夹路径[yes/no]
-是否更改v2ray文件夹路径[yes/no]
-是否更改account.txt文件夹路径[yes/no]
-# 列举所有用户 trojan password | v2ray uuid 
-123456peter 1cd55f6c-fc6b-33d3-9859-53b27014e811 
-是否更改trojan配置[yes/no]
-是否更改v2ray配置[yes/no]
-是否更改yaml配置[yes/no]
-```
+```python3 clash+trojan+v2ray用户管理脚本.py ```
 
 ## 定时任务
 

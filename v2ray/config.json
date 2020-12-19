@@ -1,30 +1,35 @@
 {
-    "inbounds": [{
-        "port": 4000,
-        "listen": "127.0.0.1",
-        "protocol": "vmess",
-        "settings": {
-            "clients": [{
-                "id": "YOURUUID",
-                "alterId": 64
-            }]
-        },
-        "streamSettings": {
-            "network": "ws",
-            "wsSettings": {
-                "path": "/path"
+    "inbounds": [
+        {
+            "port": 4000,
+            "listen": "127.0.0.1",
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "1cd55f6c-fc6b-33d3-9859-53b27014e811",
+                        "level": 1,
+                        "alterId": 64
+                    }
+                ]
             },
-            "tlsSettings": {
-                "allowInsecure": false
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/path"
+                },
+                "tlsSettings": {
+                    "allowInsecure": false
+                }
             }
         }
-    }],
-    "outbounds": [{
-        "protocol": "freedom",
-        "settings": {
-
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "settings": {}
         }
-    }],
+    ],
     "transport": {
         "sockopt": {
             "tcpFastOpen": true

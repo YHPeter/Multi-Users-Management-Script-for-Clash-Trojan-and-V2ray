@@ -1,0 +1,14 @@
+# 请把此文件放到脚本的同文件夹中
+trojan配置文件路径: trojan/config.json
+v2ray配置文件路径: v2ray/config.json
+demo.yaml文件夹路径: demo.yaml
+clash文件输出目录: clash
+是否更改trojan配置: true
+是否更改clash配置: true
+是否更改v2ray配置: true
+
+users: 
+  - password: 123456peter
+    expire: 2100-12-31
+  - password: 123456tep
+    expire: 2020-12-02

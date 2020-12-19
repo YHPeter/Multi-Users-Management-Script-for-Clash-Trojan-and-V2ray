@@ -4,172 +4,118 @@ redir-port: 7892
 allow-lan: false
 mode: Rule
 log-level: info
-external-controller: '0.0.0.0:9090'
+external-controller: 0.0.0.0:9090
 secret: ''
-
 dns:
-  enable: true
-  nameserver:
+    enable: true
+    nameserver:
     - 8.8.8.8
     - 114.114.114.114
     - tls://dns.rubyfish.cn:853
     - 1.1.1.1
-    
-  fallback:
+    fallback:
     - tls://1.0.0.1:853
     - tls://dns.google:853
-
 cfw-bypass:
-    - localhost
-    - 127.*
-    - 10.*
-    - 1.1.*
-    - 172.16.*
-    - 172.17.*
-    - 172.18.*
-    - 172.19.*
-    - 172.20.*
-    - 172.21.*
-    - 172.22.*
-    - 172.23.*
-    - 172.24.*
-    - 172.25.*
-    - 172.26.*
-    - 172.27.*
-    - 172.28.*
-    - 172.29.*
-    - 172.30.*
-    - 172.31.*
-    - 192.168.*
-    - <local>
+- localhost
+- 127.*
+- 10.*
+- 1.1.*
+- 172.16.*
+- 172.17.*
+- 172.18.*
+- 172.19.*
+- 172.20.*
+- 172.21.*
+- 172.22.*
+- 172.23.*
+- 172.24.*
+- 172.25.*
+- 172.26.*
+- 172.27.*
+- 172.28.*
+- 172.29.*
+- 172.30.*
+- 172.31.*
+- 192.168.*
+- <local>
 cfw-latency-timeout: 5000
-
-# 代理节点
 proxies:
-# 配置开始
-
-- name: HK
-  type: trojan
-  server: doamin or ip
-  port: 8443
-  password: password
-
-- name: US
-  type: trojan
-  server: doamin or ip
-  port: 8443
-  password: password
-
-- name: HK-v2ray
-  type: vmess
-  server: doamin or ip
-  port: 443
-  uuid: uuid
-  alterId: 64
-  cipher: auto
-  udp: true
-  tls: true
-  skip-cert-verify: false
-  network: ws
-  ws-path: /path
-  ws-headers:
-    Host: 
-
-- name: US-v2ray
-  type: vmess
-  server: doamin or ip
-  port: 443
-  uuid: uuid
-  alterId: 64
-  cipher: auto
-  udp: true
-  tls: true
-  skip-cert-verify: false
-  network: ws
-  ws-path: /path
-  ws-headers:
-    Host: 
-
-
-# 代理组策略
+-   name: HK
+    type: trojan
+    server: doamin or ip
+    port: 8443
+    password: 123456peter
+-   name: US
+    type: trojan
+    server: doamin or ip
+    port: 8443
+    password: 123456peter
+-   name: HK-v2ray
+    type: vmess
+    server: doamin or ip
+    port: 443
+    uuid: uuid
+    alterId: 64
+    cipher: auto
+    udp: true
+    tls: true
+    skip-cert-verify: false
+    network: ws
+    ws-path: /path
+    ws-headers:
+        Host: null
+    password: 1cd55f6c-fc6b-33d3-9859-53b27014e811
+-   name: US-v2ray
+    type: vmess
+    server: doamin or ip
+    port: 443
+    uuid: uuid
+    alterId: 64
+    cipher: auto
+    udp: true
+    tls: true
+    skip-cert-verify: false
+    network: ws
+    ws-path: /path
+    ws-headers:
+        Host: null
+    password: 1cd55f6c-fc6b-33d3-9859-53b27014e811
 proxy-groups:
-
-# load-balance: 负载均衡
-# - name: Proxy
-#   type: load-balance
-#   proxies:
-#     - US
-#     - HK
-#     - US-v2ray
-#     - HK-v2ray
-#   url: 'https://www.youtube.com'
-#   interval: 300
-
-# -   name: Proxy
-#     type: select
-#     proxies:
-#     - US
-#     - HK
-#     - US-v2ray
-#     - HK-v2ray
-
-# url-test 通过指定的 URL 测试并选择延迟最低的节点
-# - name: "自动选择快速节点"
-#   type: url-test
-#   proxies:
-#     - US
-#     - HK
-#     - US-v2ray
-#     - HK-v2ray
-#   url: 'https://www.youtube.com'
-#   interval: 300
-
-# fallback 通过指定的 URL 测试并选择可用的节点，当 1 故障不可用时自动切换到 2 以此类推
-# - name: "Fallback"
-#   type: fallback
-#   proxies:
-#     - US
-#     - HK
-#     - US-v2ray
-#     - HK-v2ray
-#   url: 'https://www.youtube.com'
-#   interval: 300
-
-  - name: Proxy
+-   name: Proxy
     type: select
     proxies:
-      - US
-      - HK
-      - US-v2ray
-      - HK-v2ray
-      - Load Balance
-      - Auto Select
+    - US
+    - HK
+    - US-v2ray
+    - HK-v2ray
+    - Load Balance
+    - Auto Select
     url: https://www.google.com
     interval: 300
-  - name: Google Scholar & Netflix
+-   name: Google Scholar & Netflix
     type: select
     proxies:
-      - HK
-      - HK-v2ray
-  - name: Load Balance
+    - HK
+    - HK-v2ray
+-   name: Load Balance
     type: load-balance
     proxies:
-      - US
-      - HK
-      - US-v2ray
-      - HK-v2ray
+    - US
+    - HK
+    - US-v2ray
+    - HK-v2ray
     url: https://www.google.com
     interval: 300
-  - name: Auto Select
+-   name: Auto Select
     type: url-test
     proxies:
-      - US
-      - HK
-      - US-v2ray
-      - HK-v2ray
-    url: 'https://www.youtube.com'
+    - US
+    - HK
+    - US-v2ray
+    - HK-v2ray
+    url: https://www.youtube.com
     interval: 300
-
 rules:
 - RULE-SET,Reject,REJECT
 - RULE-SET,Special,DIRECT
@@ -1529,5 +1475,4 @@ rules:
 - IP-CIDR,127.0.0.0/8,DIRECT
 - IP-CIDR,100.64.0.0/10,DIRECT
 - IP-CIDR,119.28.28.28/32,DIRECT,no-resolve
-# GeoIP China
 - GEOIP,CN,DIRECT
