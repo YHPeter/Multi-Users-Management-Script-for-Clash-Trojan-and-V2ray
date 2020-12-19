@@ -7,7 +7,7 @@ clash文件输出目录: clash
 是否更改clash配置: true
 是否更改v2ray配置: true
 
-users: 
+users:
   - password: 123456peter
     expire: 2100-12-31
   - password: 123456tep

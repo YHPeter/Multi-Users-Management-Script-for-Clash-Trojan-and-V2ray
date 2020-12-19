@@ -13,7 +13,8 @@ git clone https://github.com/YHPeter/Multi-VPSs-Users-Management-Script-for-Troj
 目录结构：
 
 ```
-├─clash+trojan+v2ray用户管理脚本.py
+├─clash+v2ray+trojan多用户管理脚本.py
+├─clash
 ├─demo.yaml
 ├─config.yaml
 ├─trojan
@@ -22,9 +23,10 @@ git clone https://github.com/YHPeter/Multi-VPSs-Users-Management-Script-for-Troj
     └─config.json
 ```
 ## 使用脚本
-进入脚本所在目录：
 
-```python3 clash+trojan+v2ray用户管理脚本.py ```
+进入脚本所在目录，根据自己的需求修改demo.yaml文件和config.yaml文件，然后运行脚本：
+
+```python3 clash+v2ray+trojan多用户管理脚本.py ```
 
 ## 定时任务
 
@@ -33,11 +35,10 @@ git clone https://github.com/YHPeter/Multi-VPSs-Users-Management-Script-for-Troj
 ```yum install crontabs``` 安装
 
 ```crontab -e``` 对crontab进行编辑
-　　
 
-在其中增加如下的内容（每天一点运行脚本），注意python的版本用到了 python3
+在其中增加如下的内容（每天凌晨一点运行脚本），注意python的版本用到了 python3
 
-```00 * * * * /usr/bin/python3 /absolute adress/python3 yaml+trojan+v2ray用户管理脚本.py```
+```00 1 * * * /usr/bin/python3 clash+v2ray+trojan多用户管理脚本.py```
 　　
 
 完成后，可以重启一下crontab的服务即可。
