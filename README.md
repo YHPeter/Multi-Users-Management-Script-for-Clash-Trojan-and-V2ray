@@ -43,4 +43,6 @@ git clone https://github.com/YHPeter/Multi-VPSs-Users-Management-Script-for-Troj
 
 完成后，可以重启一下crontab的服务即可。
 
-```service crond restart```
+    service crond restart 
+    or
+    systemctl restart crond
