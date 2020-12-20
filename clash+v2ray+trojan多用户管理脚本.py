@@ -93,22 +93,14 @@ class Management():
         os.system('rm -f %s*.yaml'%clash_output)
 
         for trojanpwd in trojan_pwdList:
-            with open(os.path.join(clash_output,trojanpwd+'.yaml'), 'w') as f:
-                data = demo.copy()
-                proxies = []
-                proxy = demo['proxies']
-                for node in proxy:
+            with open(os.path.join(clash_output,trojanpwd+'.yaml'), 'w') as f:    
+                for i in range(len(demo['proxies'])):
+                    node = demo['proxies'][i]
                     if node['type']=='trojan':
-                        node['password'] = trojanpwd
-
-                    if node['type']=='vmess':
-                        node['password'] = str(uuid.uuid3(uuid.NAMESPACE_DNS, trojanpwd))
-
-                    proxies.append(node)
-
-                data['proxies'] = proxies
-
-                yaml.dump(data,f,allow_unicode=True,sort_keys=False,indent=4)
+                        demo['proxies'][i]['password'] = trojanpwd
+                    elif node['type']=='vmess':
+                        demo['proxies'][i]['uuid'] = str(uuid.uuid3(uuid.NAMESPACE_DNS, trojanpwd))
+                yaml.dump(demo,f,allow_unicode=True,sort_keys=False,indent=4)
 
 if __name__ == "__main__":
     Management()

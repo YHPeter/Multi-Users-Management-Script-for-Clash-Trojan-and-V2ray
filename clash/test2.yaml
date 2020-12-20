@@ -55,7 +55,7 @@ proxies:
     type: vmess
     server: doamin or ip
     port: 443
-    uuid: uuid
+    uuid: f1917643-06b2-3e6d-ab77-0a5044067d0a
     alterId: 64
     cipher: auto
     udp: true
@@ -65,12 +65,11 @@ proxies:
     ws-path: /path
     ws-headers:
         Host: null
-    password: f1917643-06b2-3e6d-ab77-0a5044067d0a
 -   name: US-v2ray
     type: vmess
     server: doamin or ip
     port: 443
-    uuid: uuid
+    uuid: f1917643-06b2-3e6d-ab77-0a5044067d0a
     alterId: 64
     cipher: auto
     udp: true
@@ -80,7 +79,6 @@ proxies:
     ws-path: /path
     ws-headers:
         Host: null
-    password: f1917643-06b2-3e6d-ab77-0a5044067d0a
 proxy-groups:
 -   name: Proxy
     type: select
