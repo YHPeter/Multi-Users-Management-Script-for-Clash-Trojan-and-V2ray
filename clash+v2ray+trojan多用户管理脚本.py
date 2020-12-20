@@ -90,7 +90,12 @@ class Management():
         with open(demo_yaml, 'r', encoding = 'utf-8') as f:
             demo = yaml.safe_load(f)
 
-        os.system('rm -f %s*.yaml'%clash_output)
+        if self.env == 'linux':
+            try:
+                os.system('rm -f %s*.yaml'%clash_output)
+            except Exception as e:
+                print('删除所有clash文件发生%s错误，请检查！'%e)
+        else: print('不是linux系统，不执行删除所有clash文件指令！')
 
         for trojanpwd in trojan_pwdList:
             with open(os.path.join(clash_output,trojanpwd+'.yaml'), 'w') as f:    
