@@ -45,7 +45,11 @@ git clone https://github.com/YHPeter/Multi-VPSs-Users-Management-Script-for-Troj
 　　
 完成后，可以重启一下crontab的服务即可。
 
-```service crond restart```
+```bash
+service crond restart
+or
+systemctl restart crond 
+```
 
 ## 功能
 
@@ -60,7 +64,8 @@ git clone https://github.com/YHPeter/Multi-VPSs-Users-Management-Script-for-Troj
 ### TIPS: yaml.dump()写入scripts字段到文件时，会自动加'\\' 和 '\n'，但实际上是没有区别的（clash不会报错）！
 
 ## 测试
-```
+
+``` yaml
 config.yaml
 users: 
   - password: test1
@@ -68,4 +73,5 @@ users:
   - password: test2
     expire: 2100-12-31
 ```
+
 由于test1已经过期了，所以clash只会生成test2.yaml
