@@ -4,172 +4,118 @@ redir-port: 7892
 allow-lan: false
 mode: Rule
 log-level: info
-external-controller: '0.0.0.0:9090'
+external-controller: 0.0.0.0:9090
 secret: ''
-
 dns:
-  enable: true
-  nameserver:
+    enable: true
+    nameserver:
     - 8.8.8.8
     - 114.114.114.114
     - tls://dns.rubyfish.cn:853
     - 1.1.1.1
-    
-  fallback:
+    fallback:
     - tls://1.0.0.1:853
     - tls://dns.google:853
-
 cfw-bypass:
-    - localhost
-    - 127.*
-    - 10.*
-    - 1.1.*
-    - 172.16.*
-    - 172.17.*
-    - 172.18.*
-    - 172.19.*
-    - 172.20.*
-    - 172.21.*
-    - 172.22.*
-    - 172.23.*
-    - 172.24.*
-    - 172.25.*
-    - 172.26.*
-    - 172.27.*
-    - 172.28.*
-    - 172.29.*
-    - 172.30.*
-    - 172.31.*
-    - 192.168.*
-    - <local>
+- localhost
+- 127.*
+- 10.*
+- 1.1.*
+- 172.16.*
+- 172.17.*
+- 172.18.*
+- 172.19.*
+- 172.20.*
+- 172.21.*
+- 172.22.*
+- 172.23.*
+- 172.24.*
+- 172.25.*
+- 172.26.*
+- 172.27.*
+- 172.28.*
+- 172.29.*
+- 172.30.*
+- 172.31.*
+- 192.168.*
+- <local>
 cfw-latency-timeout: 5000
-
-# 代理节点
 proxies:
-# 配置开始
-
-- name: HK
-  type: trojan
-  server: doamin or ip
-  port: 8443
-  password: password
-
-- name: US
-  type: trojan
-  server: doamin or ip
-  port: 8443
-  password: password
-
-- name: HK-v2ray
-  type: vmess
-  server: doamin or ip
-  port: 443
-  uuid: uuid
-  alterId: 64
-  cipher: auto
-  udp: true
-  tls: true
-  skip-cert-verify: false
-  network: ws
-  ws-path: /path
-  ws-headers:
-    Host: 
-
-- name: US-v2ray
-  type: vmess
-  server: doamin or ip
-  port: 443
-  uuid: uuid
-  alterId: 64
-  cipher: auto
-  udp: true
-  tls: true
-  skip-cert-verify: false
-  network: ws
-  ws-path: /path
-  ws-headers:
-    Host: 
-
-
-# 代理组策略
+-   name: HK
+    type: trojan
+    server: doamin or ip
+    port: 8443
+    password: test2
+-   name: US
+    type: trojan
+    server: doamin or ip
+    port: 8443
+    password: test2
+-   name: HK-v2ray
+    type: vmess
+    server: doamin or ip
+    port: 443
+    uuid: uuid
+    alterId: 64
+    cipher: auto
+    udp: true
+    tls: true
+    skip-cert-verify: false
+    network: ws
+    ws-path: /path
+    ws-headers:
+        Host: null
+    password: f1917643-06b2-3e6d-ab77-0a5044067d0a
+-   name: US-v2ray
+    type: vmess
+    server: doamin or ip
+    port: 443
+    uuid: uuid
+    alterId: 64
+    cipher: auto
+    udp: true
+    tls: true
+    skip-cert-verify: false
+    network: ws
+    ws-path: /path
+    ws-headers:
+        Host: null
+    password: f1917643-06b2-3e6d-ab77-0a5044067d0a
 proxy-groups:
-
-# load-balance: 负载均衡
-# - name: Proxy
-#   type: load-balance
-#   proxies:
-#     - US
-#     - HK
-#     - US-v2ray
-#     - HK-v2ray
-#   url: 'https://www.youtube.com'
-#   interval: 300
-
-# -   name: Proxy
-#     type: select
-#     proxies:
-#     - US
-#     - HK
-#     - US-v2ray
-#     - HK-v2ray
-
-# url-test 通过指定的 URL 测试并选择延迟最低的节点
-# - name: "自动选择快速节点"
-#   type: url-test
-#   proxies:
-#     - US
-#     - HK
-#     - US-v2ray
-#     - HK-v2ray
-#   url: 'https://www.youtube.com'
-#   interval: 300
-
-# fallback 通过指定的 URL 测试并选择可用的节点，当 1 故障不可用时自动切换到 2 以此类推
-# - name: "Fallback"
-#   type: fallback
-#   proxies:
-#     - US
-#     - HK
-#     - US-v2ray
-#     - HK-v2ray
-#   url: 'https://www.youtube.com'
-#   interval: 300
-
-  - name: Proxy
+-   name: Proxy
     type: select
     proxies:
-      - US
-      - HK
-      - US-v2ray
-      - HK-v2ray
-      - Load Balance
-      - Auto Select
+    - US
+    - HK
+    - US-v2ray
+    - HK-v2ray
+    - Load Balance
+    - Auto Select
     url: https://www.google.com
     interval: 300
-  - name: Google Scholar & Netflix
+-   name: Google Scholar & Netflix
     type: select
     proxies:
-      - HK
-      - HK-v2ray
-  - name: Load Balance
+    - HK
+    - HK-v2ray
+-   name: Load Balance
     type: load-balance
     proxies:
-      - US
-      - HK
-      - US-v2ray
-      - HK-v2ray
+    - US
+    - HK
+    - US-v2ray
+    - HK-v2ray
     url: https://www.google.com
     interval: 300
-  - name: Auto Select
+-   name: Auto Select
     type: url-test
     proxies:
-      - US
-      - HK
-      - US-v2ray
-      - HK-v2ray
-    url: 'https://www.youtube.com'
+    - US
+    - HK
+    - US-v2ray
+    - HK-v2ray
+    url: https://www.youtube.com
     interval: 300
-
 rules:
 - RULE-SET,Reject,REJECT
 - RULE-SET,Special,DIRECT
@@ -1529,440 +1475,385 @@ rules:
 - IP-CIDR,127.0.0.0/8,DIRECT
 - IP-CIDR,100.64.0.0/10,DIRECT
 - IP-CIDR,119.28.28.28/32,DIRECT,no-resolve
-# GeoIP China
 - GEOIP,CN,DIRECT
 script:
-  code: |
-    def main(ctx, metadata):
-        port_list = [21, 22, 23, 53, 80, 123, 143, 194, 443, 465, 587, 853, 993, 995, 998, 2052, 2053, 2082, 2083, 2086, 2095, 2096, 5222, 5228, 5229, 5230, 8080, 8443, 8880, 8888, 8889]
-        ruleset_action = {"Reject": "REJECT",
-            "Special": "DIRECT",
-            "Netflix": "Proxy",
-            "Spotify": "Proxy",
-            "YouTube": "Proxy",
-            "Bilibili": "DIRECT",
-            "iQiyi": "DIRECT",
-            "Letv": "DIRECT",
-            "Netease Music": "DIRECT",
-            "Tencent Video": "DIRECT",
-            "Youku": "DIRECT",
-            "ABC": "Proxy",
-            "Abema TV": "Proxy",
-            "Amazon": "Proxy",
-            "Apple News": "Proxy",
-            "Apple TV": "Proxy",
-            "Bahamut": "Proxy",
-            "BBC iPlayer": "Proxy",
-            "DAZN": "Proxy",
-            "Disney Plus": "Proxy",
-            "encoreTVB": "Proxy",
-            "Fox Now": "Proxy",
-            "Fox+": "Proxy",
-            "HBO": "Proxy",
-            "Hulu Japan": "Proxy",
-            "Hulu": "Proxy",
-            "Japonx": "Proxy",
-            "JOOX": "Proxy",
-            "KKBOX": "Proxy",
-            "KKTV": "Proxy",
-            "Line TV": "Proxy",
-            "myTV SUPER": "Proxy",
-            "Pandora": "Proxy",
-            "PBS": "Proxy",
-            "Pornhub": "Proxy",
-            "Soundcloud": "Proxy",
-            "ViuTV": "Proxy",
-            "Telegram": "Proxy",
-            "Steam": "Proxy",
-            "Speedtest": "Proxy",
-            "PayPal": "Proxy",
-            "Microsoft": "Proxy",
-            "PROXY": "Proxy",
-            "Apple": "Proxy",
-            "Domestic": "DIRECT",
-            "Domestic IPs": "DIRECT"
-            }
-        port = int(metadata["dst_port"])
-
-        if port not in port_list:
-            return "DIRECT"
-
-        for rule_name in ctx.rule_providers.keys():
-            if ctx.rule_providers[rule_name].match(metadata):
-                return ruleset_action[rule_name]
-
-        ip = metadata["dst_ip"] or ctx.resolve_ip(metadata["host"])
-
-        if ip == "":
-          return "DIRECT"
-
-        code = ctx.geoip(ip)
-        if code == "LAN":
-          return "DIRECT"
-
-        if code == "CN":
-          return "DIRECT"
-
-        return "Proxy"
-        
+    code: "def main(ctx, metadata):\n    port_list = [21, 22, 23, 53, 80, 123, 143,\
+        \ 194, 443, 465, 587, 853, 993, 995, 998, 2052, 2053, 2082, 2083, 2086, 2095,\
+        \ 2096, 5222, 5228, 5229, 5230, 8080, 8443, 8880, 8888, 8889]\n    ruleset_action\
+        \ = {\"Reject\": \"REJECT\",\n        \"Special\": \"DIRECT\",\n        \"\
+        Netflix\": \"Proxy\",\n        \"Spotify\": \"Proxy\",\n        \"YouTube\"\
+        : \"Proxy\",\n        \"Bilibili\": \"DIRECT\",\n        \"iQiyi\": \"DIRECT\"\
+        ,\n        \"Letv\": \"DIRECT\",\n        \"Netease Music\": \"DIRECT\",\n\
+        \        \"Tencent Video\": \"DIRECT\",\n        \"Youku\": \"DIRECT\",\n\
+        \        \"ABC\": \"Proxy\",\n        \"Abema TV\": \"Proxy\",\n        \"\
+        Amazon\": \"Proxy\",\n        \"Apple News\": \"Proxy\",\n        \"Apple\
+        \ TV\": \"Proxy\",\n        \"Bahamut\": \"Proxy\",\n        \"BBC iPlayer\"\
+        : \"Proxy\",\n        \"DAZN\": \"Proxy\",\n        \"Disney Plus\": \"Proxy\"\
+        ,\n        \"encoreTVB\": \"Proxy\",\n        \"Fox Now\": \"Proxy\",\n  \
+        \      \"Fox+\": \"Proxy\",\n        \"HBO\": \"Proxy\",\n        \"Hulu Japan\"\
+        : \"Proxy\",\n        \"Hulu\": \"Proxy\",\n        \"Japonx\": \"Proxy\"\
+        ,\n        \"JOOX\": \"Proxy\",\n        \"KKBOX\": \"Proxy\",\n        \"\
+        KKTV\": \"Proxy\",\n        \"Line TV\": \"Proxy\",\n        \"myTV SUPER\"\
+        : \"Proxy\",\n        \"Pandora\": \"Proxy\",\n        \"PBS\": \"Proxy\"\
+        ,\n        \"Pornhub\": \"Proxy\",\n        \"Soundcloud\": \"Proxy\",\n \
+        \       \"ViuTV\": \"Proxy\",\n        \"Telegram\": \"Proxy\",\n        \"\
+        Steam\": \"Proxy\",\n        \"Speedtest\": \"Proxy\",\n        \"PayPal\"\
+        : \"Proxy\",\n        \"Microsoft\": \"Proxy\",\n        \"PROXY\": \"Proxy\"\
+        ,\n        \"Apple\": \"Proxy\",\n        \"Domestic\": \"DIRECT\",\n    \
+        \    \"Domestic IPs\": \"DIRECT\"\n        }\n    port = int(metadata[\"dst_port\"\
+        ])\n\n    if port not in port_list:\n        return \"DIRECT\"\n\n    for\
+        \ rule_name in ctx.rule_providers.keys():\n        if ctx.rule_providers[rule_name].match(metadata):\n\
+        \            return ruleset_action[rule_name]\n\n    ip = metadata[\"dst_ip\"\
+        ] or ctx.resolve_ip(metadata[\"host\"])\n\n    if ip == \"\":\n      return\
+        \ \"DIRECT\"\n\n    code = ctx.geoip(ip)\n    if code == \"LAN\":\n      return\
+        \ \"DIRECT\"\n\n    if code == \"CN\":\n      return \"DIRECT\"\n\n    return\
+        \ \"Proxy\"\n    \n"
 rule-providers:
-  Reject:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Reject.yaml
-    path: ./Rules/Reject
-    interval: 86400
-  Special:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Special.yaml
-    path: ./Rules/Special
-    interval: 86400
-  Netflix:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Netflix.yaml
-    path: ./Rules/Media/Netflix
-    interval: 86400
-  Spotify:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Spotify.yaml
-    path: ./Rules/Media/Spotify
-    interval: 86400
-  YouTube:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/YouTube.yaml
-    path: ./Rules/Media/YouTube
-    interval: 86400
-  Bilibili:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Bilibili.yaml
-    path: ./Rules/Media/Bilibili
-    interval: 86400
-  iQiyi:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/iQiyi.yaml
-    path: ./Rules/Media/iQiyi
-    interval: 86400
-  Letv:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Letv.yaml
-    path: ./Rules/Media/Letv
-    interval: 86400
-  Netease Music:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Netease%20Music.yaml
-    path: ./Rules/Media/Netease_Music
-    interval: 86400
-  Tencent Video:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Tencent%20Video.yaml
-    path: ./Rules/Media/Tencent_Video
-    interval: 86400
-  Youku:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Youku.yaml
-    path: ./Rules/Media/Youku
-    interval: 86400
-  ABC:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/ABC.yaml
-    path: ./Rules/Media/ABC
-    interval: 86400
-  Abema TV:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Abema%20TV.yaml
-    path: ./Rules/Media/Abema_TV
-    interval: 86400
-  Amazon:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Amazon.yaml
-    path: ./Rules/Media/Amazon
-    interval: 86400
-  Apple News:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Apple%20News.yaml
-    path: ./Rules/Media/Apple_News
-    interval: 86400
-  Apple TV:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Apple%20TV.yaml
-    path: ./Rules/Media/Apple_TV
-    interval: 86400
-  Bahamut:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Bahamut.yaml
-    path: ./Rules/Media/Bahamut
-    interval: 86400
-  BBC iPlayer:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/BBC%20iPlayer.yaml
-    path: ./Rules/Media/BBC_iPlayer
-    interval: 86400
-  DAZN:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/DAZN.yaml
-    path: ./Rules/Media/DAZN
-    interval: 86400
-  Disney Plus:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Disney%20Plus.yaml
-    path: ./Rules/Media/Disney_Plus
-    interval: 86400
-  encoreTVB:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/encoreTVB.yaml
-    path: ./Rules/Media/encoreTVB
-    interval: 86400
-  Fox Now:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Fox%20Now.yaml
-    path: ./Rules/Media/Fox_Now
-    interval: 86400
-  Fox+:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Fox%2B.yaml
-    path: ./Rules/Media/Fox+
-    interval: 86400
-  HBO:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/HBO.yaml
-    path: ./Rules/Media/HBO
-    interval: 86400
-  Hulu Japan:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Hulu%20Japan.yaml
-    path: ./Rules/Media/Hulu_Japan
-    interval: 86400
-  Hulu:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Hulu.yaml
-    path: ./Rules/Media/Hulu
-    interval: 86400
-  Japonx:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Japonx.yaml
-    path: ./Rules/Media/Japonx
-    interval: 86400
-  JOOX:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/JOOX.yaml
-    path: ./Rules/Media/JOOX
-    interval: 86400
-  KKBOX:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/KKBOX.yaml
-    path: ./Rules/Media/KKBOX
-    interval: 86400
-  KKTV:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/KKTV.yaml
-    path: ./Rules/Media/KKTV
-    interval: 86400
-  Line TV:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Line%20TV.yaml
-    path: ./Rules/Media/Line_TV
-    interval: 86400
-  myTV SUPER:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/myTV%20SUPER.yaml
-    path: ./Rules/Media/myTV_SUPER
-    interval: 86400
-  Pandora:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Pandora.yaml
-    path: ./Rules/Media/Pandora
-    interval: 86400
-  PBS:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/PBS.yaml
-    path: ./Rules/Media/PBS
-    interval: 86400
-  Pornhub:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Pornhub.yaml
-    path: ./Rules/Media/Pornhub
-    interval: 86400
-  Soundcloud:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Soundcloud.yaml
-    path: ./Rules/Media/Soundcloud
-    interval: 86400
-  ViuTV:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/ViuTV.yaml
-    path: ./Rules/Media/ViuTV
-    interval: 86400
-  Telegram:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Telegram.yaml
-    path: ./Rules/Telegram
-    interval: 86400
-  Steam:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Steam.yaml
-    path: ./Rules/Steam
-    interval: 86400
-  Speedtest:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Speedtest.yaml
-    path: ./Rules/Speedtest
-    interval: 86400
-  PayPal:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/PayPal.yaml
-    path: ./Rules/PayPal
-    interval: 86400
-  Microsoft:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Microsoft.yaml
-    path: ./Rules/Microsoft
-    interval: 86400
-  PROXY:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Proxy.yaml
-    path: ./Rules/Proxy
-    interval: 86400
-  Domestic:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Domestic.yaml
-    path: ./Rules/Domestic
-    interval: 86400
-  Apple:
-    type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Apple.yaml
-    path: ./Rules/Apple
-    interval: 86400
-  Domestic IPs:
-    type: http
-    behavior: ipcidr
-    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Domestic%20IPs.yaml
-    path: ./Rules/Domestic_IPs
-    interval: 86400
-    
-  reject:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
-    path: ./ruleset/reject.yaml
-    interval: 86400
-
-  icloud:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
-    path: ./ruleset/icloud.yaml
-    interval: 86400
-
-  apple:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
-    path: ./ruleset/apple.yaml
-    interval: 86400
-
-  google:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
-    path: ./ruleset/google.yaml
-    interval: 86400
-
-  proxy:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
-    path: ./ruleset/proxy.yaml
-    interval: 86400
-
-  direct:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
-    path: ./ruleset/direct.yaml
-    interval: 86400
-
-  gfw:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
-    path: ./ruleset/gfw.yaml
-    interval: 86400
-
-  greatfire:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt"
-    path: ./ruleset/greatfire.yaml
-    interval: 86400
-
-  tld-not-cn:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
-    path: ./ruleset/tld-not-cn.yaml
-    interval: 86400
-
-  telegramcidr:
-    type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
-    path: ./ruleset/telegramcidr.yaml
-    interval: 86400
-
-  cncidr:
-    type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
-    path: ./ruleset/cncidr.yaml
-    interval: 86400
-
-  lancidr:
-    type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
-    path: ./ruleset/lancidr.yaml
-    interval: 86400
+    Reject:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Reject.yaml
+        path: ./Rules/Reject
+        interval: 86400
+    Special:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Special.yaml
+        path: ./Rules/Special
+        interval: 86400
+    Netflix:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Netflix.yaml
+        path: ./Rules/Media/Netflix
+        interval: 86400
+    Spotify:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Spotify.yaml
+        path: ./Rules/Media/Spotify
+        interval: 86400
+    YouTube:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/YouTube.yaml
+        path: ./Rules/Media/YouTube
+        interval: 86400
+    Bilibili:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Bilibili.yaml
+        path: ./Rules/Media/Bilibili
+        interval: 86400
+    iQiyi:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/iQiyi.yaml
+        path: ./Rules/Media/iQiyi
+        interval: 86400
+    Letv:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Letv.yaml
+        path: ./Rules/Media/Letv
+        interval: 86400
+    Netease Music:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Netease%20Music.yaml
+        path: ./Rules/Media/Netease_Music
+        interval: 86400
+    Tencent Video:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Tencent%20Video.yaml
+        path: ./Rules/Media/Tencent_Video
+        interval: 86400
+    Youku:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Youku.yaml
+        path: ./Rules/Media/Youku
+        interval: 86400
+    ABC:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/ABC.yaml
+        path: ./Rules/Media/ABC
+        interval: 86400
+    Abema TV:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Abema%20TV.yaml
+        path: ./Rules/Media/Abema_TV
+        interval: 86400
+    Amazon:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Amazon.yaml
+        path: ./Rules/Media/Amazon
+        interval: 86400
+    Apple News:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Apple%20News.yaml
+        path: ./Rules/Media/Apple_News
+        interval: 86400
+    Apple TV:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Apple%20TV.yaml
+        path: ./Rules/Media/Apple_TV
+        interval: 86400
+    Bahamut:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Bahamut.yaml
+        path: ./Rules/Media/Bahamut
+        interval: 86400
+    BBC iPlayer:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/BBC%20iPlayer.yaml
+        path: ./Rules/Media/BBC_iPlayer
+        interval: 86400
+    DAZN:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/DAZN.yaml
+        path: ./Rules/Media/DAZN
+        interval: 86400
+    Disney Plus:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Disney%20Plus.yaml
+        path: ./Rules/Media/Disney_Plus
+        interval: 86400
+    encoreTVB:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/encoreTVB.yaml
+        path: ./Rules/Media/encoreTVB
+        interval: 86400
+    Fox Now:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Fox%20Now.yaml
+        path: ./Rules/Media/Fox_Now
+        interval: 86400
+    Fox+:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Fox%2B.yaml
+        path: ./Rules/Media/Fox+
+        interval: 86400
+    HBO:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/HBO.yaml
+        path: ./Rules/Media/HBO
+        interval: 86400
+    Hulu Japan:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Hulu%20Japan.yaml
+        path: ./Rules/Media/Hulu_Japan
+        interval: 86400
+    Hulu:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Hulu.yaml
+        path: ./Rules/Media/Hulu
+        interval: 86400
+    Japonx:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Japonx.yaml
+        path: ./Rules/Media/Japonx
+        interval: 86400
+    JOOX:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/JOOX.yaml
+        path: ./Rules/Media/JOOX
+        interval: 86400
+    KKBOX:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/KKBOX.yaml
+        path: ./Rules/Media/KKBOX
+        interval: 86400
+    KKTV:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/KKTV.yaml
+        path: ./Rules/Media/KKTV
+        interval: 86400
+    Line TV:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Line%20TV.yaml
+        path: ./Rules/Media/Line_TV
+        interval: 86400
+    myTV SUPER:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/myTV%20SUPER.yaml
+        path: ./Rules/Media/myTV_SUPER
+        interval: 86400
+    Pandora:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Pandora.yaml
+        path: ./Rules/Media/Pandora
+        interval: 86400
+    PBS:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/PBS.yaml
+        path: ./Rules/Media/PBS
+        interval: 86400
+    Pornhub:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Pornhub.yaml
+        path: ./Rules/Media/Pornhub
+        interval: 86400
+    Soundcloud:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/Soundcloud.yaml
+        path: ./Rules/Media/Soundcloud
+        interval: 86400
+    ViuTV:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Media/ViuTV.yaml
+        path: ./Rules/Media/ViuTV
+        interval: 86400
+    Telegram:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Telegram.yaml
+        path: ./Rules/Telegram
+        interval: 86400
+    Steam:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Steam.yaml
+        path: ./Rules/Steam
+        interval: 86400
+    Speedtest:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Speedtest.yaml
+        path: ./Rules/Speedtest
+        interval: 86400
+    PayPal:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/PayPal.yaml
+        path: ./Rules/PayPal
+        interval: 86400
+    Microsoft:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Microsoft.yaml
+        path: ./Rules/Microsoft
+        interval: 86400
+    PROXY:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Proxy.yaml
+        path: ./Rules/Proxy
+        interval: 86400
+    Domestic:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Domestic.yaml
+        path: ./Rules/Domestic
+        interval: 86400
+    Apple:
+        type: http
+        behavior: classical
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Apple.yaml
+        path: ./Rules/Apple
+        interval: 86400
+    Domestic IPs:
+        type: http
+        behavior: ipcidr
+        url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Domestic%20IPs.yaml
+        path: ./Rules/Domestic_IPs
+        interval: 86400
+    reject:
+        type: http
+        behavior: domain
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt
+        path: ./ruleset/reject.yaml
+        interval: 86400
+    icloud:
+        type: http
+        behavior: domain
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt
+        path: ./ruleset/icloud.yaml
+        interval: 86400
+    apple:
+        type: http
+        behavior: domain
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt
+        path: ./ruleset/apple.yaml
+        interval: 86400
+    google:
+        type: http
+        behavior: domain
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt
+        path: ./ruleset/google.yaml
+        interval: 86400
+    proxy:
+        type: http
+        behavior: domain
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt
+        path: ./ruleset/proxy.yaml
+        interval: 86400
+    direct:
+        type: http
+        behavior: domain
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt
+        path: ./ruleset/direct.yaml
+        interval: 86400
+    gfw:
+        type: http
+        behavior: domain
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt
+        path: ./ruleset/gfw.yaml
+        interval: 86400
+    greatfire:
+        type: http
+        behavior: domain
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt
+        path: ./ruleset/greatfire.yaml
+        interval: 86400
+    tld-not-cn:
+        type: http
+        behavior: domain
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt
+        path: ./ruleset/tld-not-cn.yaml
+        interval: 86400
+    telegramcidr:
+        type: http
+        behavior: ipcidr
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt
+        path: ./ruleset/telegramcidr.yaml
+        interval: 86400
+    cncidr:
+        type: http
+        behavior: ipcidr
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt
+        path: ./ruleset/cncidr.yaml
+        interval: 86400
+    lancidr:
+        type: http
+        behavior: ipcidr
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt
+        path: ./ruleset/lancidr.yaml
+        interval: 86400

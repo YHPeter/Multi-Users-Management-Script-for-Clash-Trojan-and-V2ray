@@ -5,7 +5,7 @@
     "remote_addr": "127.0.0.1",
     "remote_port": 80,
     "password": [
-        "123456peter"
+        "test2"
     ],
     "log_level": 1,
     "ssl": {
